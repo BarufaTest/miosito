@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barufa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Rubik+Glitch&family=Wallpoet&display=swap');
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #000;
+    }
+    header {
+      position: relative;
+    }
+    .menu-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 74px;
+      font-family: 'Wallpoet', cursive;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+      text-transform: lowercase;
+    }
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 145px; /* Spostato di circa 2,5cm (96px = 1 inch, quindi ~96px) */
+      right: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1;
+    }
+    .dropdown button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+    }
+    .dropdown button:hover {
+      background-color: #f0f0f0;
+    }
+    section {
+      display: none;
+      padding: 20px;
+    }
+    section.active {
+      display: block;
+    }
+    #home {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 132px;
+      font-weight: normal;
+      text-transform: uppercase;
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="menu-button" onclick="toggleMenu()">menu</button>
+    <div class="dropdown" id="menu">
+      <button onclick="navigateTo('inventario')">Inventario & Trasferte</button>
+      <button onclick="navigateTo('comunicazione')">Email / DM</button>
+      <button onclick="navigateTo('fornitori')">Fornitori</button>
+      <button onclick="navigateTo('dashboard')">Dashboard</button>
+      <button onclick="navigateTo('finanze')">Entrate / Uscite</button>
+      <button onclick="navigateTo('feedback')">Gift & Feedback</button>
+      <button onclick="navigateTo('home')">Torna alla Home</button>
+    </div>
+  </header>
+
+  <section id="home" class="active">
+    Barufa
+  </section>
+
+  <section id="inventario">
+    <h2>Inventario & Registro Trasferte</h2>
+    <p>Inserisci qui l'elenco dettagliato degli oggetti e i viaggi in programma.</p>
+  </section>
+
+  <section id="comunicazione">
+    <h2>Gestione Email / DM</h2>
+    <p>Organizza e tieni traccia delle comunicazioni importanti.</p>
+  </section>
+
+  <section id="fornitori">
+    <h2>Rapporti con Fornitori</h2>
+    <p>Pagina per note su pagamenti, profili fornitori e aggiornamenti.</p>
+  </section>
+
+  <section id="dashboard">
+    <h2>Dashboard Interattiva</h2>
+    <p>Qui puoi visualizzare una sintesi grafica delle attività (in sviluppo).</p>
+  </section>
+
+  <section id="finanze">
+    <h2>Gestione Entrate e Uscite</h2>
+    <p>Traccia dei movimenti economici.</p>
+  </section>
+
+  <section id="feedback">
+    <h2>Registro Gift & Feedback</h2>
+    <p>Archivio dei regali e dei feedback ricevuti.</p>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function navigateTo(id) {
+      document.querySelectorAll('section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+      document.getElementById('menu').style.display = 'none';
+    }
+
+    window.addEventListener('click', function(event) {
+      const menu = document.getElementById('menu');
+      const button = document.querySelector('.menu-button');
+      if (menu.style.display === 'block' && !menu.contains(event.target) && event.target !== button) {
+        menu.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
